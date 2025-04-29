@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:5.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  fitness-user-service:
+    build:
+      context: ./fitness-user-service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+
+  fitness-meal-tracker-service:
+    build:
+      context: ./fitness-meal-tracker-service
+    ports:
+      - "5002:5002"
+    depends_on:
+      - mongo
+
+  fitness-workout-service:
+    build:
+      context: ./fitness-workout-service
+    ports:
+      - "5003:5003"
+    depends_on:
+      - mongo
+
+  fitness-reporting-service:
+    build:
+      context: ./fitness-reporting-service
+    ports:
+      - "5004:5004"
+    depends_on:
+      - fitness-user-service
+      - fitness-meal-tracker-service
+      - fitness-workout-service
+
+volumes:
+  mongo-data:
