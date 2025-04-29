@@ -1,2 +1,1 @@
-# fitness-service
-Scalable services assignment
+Fitness service for tracking fitness of a user - includes 4 micro-services: fitness-user service for managing user, fitness-meal-service for managing meals of user, fitness-workout-service for tracking workouts and fitness-reporting-service for generating reports
